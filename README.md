@@ -1,0 +1,2 @@
+# RemoteController
+一个用于在浏览器端对局域网内单个Windows计算机进行有限远程控制的实用程序
