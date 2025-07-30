@@ -52,11 +52,20 @@ Coral Remote Controller是一个用于在浏览器端对局域网内单个Window
 + glightbox
 + sweetalert
 + aos
++ jsencrypt
++ bootstrap-auto-dark-mode
++ notyf
++ pdf.js
++ docx.js
++ jszip
++ marked
 ### 后端程序
 + Apache
 + GNU CgiCc
 + 7-Zip
 + libjpeg
++ openssl
++ jsmpeg-vnc
 ### 插图
 + Bing Wallpaper
 + Windows Spotlight
