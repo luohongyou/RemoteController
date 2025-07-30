@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="jszip.min.js"></script>
+    <script src="docx-preview.min.js"></script>
+</head>
+
+<body>
+    <div id="docxcontainer" width="100%" height="100%"></div>
+    <script>
+        window.onload = function() {
+            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var scale = screenWidth / 900;
+            document.body.style.zoom = scale;
+        }
+
+        let currentDocument = null;
+        const docxOptions = Object.assign(docx.defaultOptions, {
+            debug: false,
+            experimental: true
+        });
+        const container = document.getElementById("docxcontainer");
+        const thumbcontainer = document.getElementById("thumbcontainer");
+
+        function renderDocx(file) {
+            currentDocument = file; 
+
+            if (!currentDocument) 
+                return;
+
+            docx.renderAsync(currentDocument, container, null, docxOptions)
+                .then((x) => {
+                    console.log(x);
+                });
+        }
+        function parseQueryString(query) {
+            const params = new Map();
+            for (const [key, value] of new URLSearchParams(query)) {
+                params.set(key.toLowerCase(), value);
+            }
+            return params;
+        }
+
+        const queryString = document.location.search.substring(1);
+        const params = parseQueryString(queryString);
+        file = params.get("file");
+
+        fetch(file).then(function(resp){
+            resp.blob().then(function(_blobed){
+                renderDocx(_blobed);
+            })
+        })
+
+    </script>
+</body>
+
+</html>
