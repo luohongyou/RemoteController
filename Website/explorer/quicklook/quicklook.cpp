@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
 		else if (extType == T_PDF)
 			AJAXOutput((std::string)"<!-- UseIframe -->/assets/vendor/previewhandler/pdfjs/viewer.html?file=/" + LocalFileName);
 		else if (extType == T_DOCX)
-			AJAXOutput((std::string)"<!-- UseIframe -->/assets/vendor/previewhandler/docxjs/viewer.html?file=/" + LocalFileName);
+			AJAXOutput((std::string)"<!-- UseIframe -->/assets/vendor/previewhandler/docxjs/viewer_v2.html?file=/" + LocalFileName);
 
 	}
 	// else if (...)

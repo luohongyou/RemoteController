@@ -9,12 +9,6 @@
 <body>
     <div id="docxcontainer" width="100%" height="100%"></div>
     <script>
-        window.onload = function() {
-            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            var scale = screenWidth / 900;
-            document.body.style.zoom = scale;
-        }
-
         let currentDocument = null;
         const docxOptions = Object.assign(docx.defaultOptions, {
             debug: false,
@@ -49,6 +43,16 @@
         fetch(file).then(function(resp){
             resp.blob().then(function(_blobed){
                 renderDocx(_blobed);
+
+                var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                var scale = screenWidth / 900;
+                document.body.style.zoom = scale;
+
+                setTimeout(function(){
+                    var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                    var scale = screenWidth / 900;
+                    document.body.style.zoom = scale;
+                }, 500);
             })
         })
 

@@ -54,9 +54,11 @@ std::string HTMLFrame::OutputFrameCode(int _PageType, std::string _CustomCode)
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css?version=)" + PROGRAM_BUILD_S + R"(" rel="stylesheet" media="(prefers-color-scheme: light) " >
   <link href="/assets/css/style_dark.css?version=)" + PROGRAM_BUILD_S + R"(" rel="stylesheet" media="(prefers-color-scheme: dark) " >
+  <link href="/assets/css/jquery-ui.min.css" rel="stylesheet">
 
   <!-- Addons JS File -->
   <script src="/assets/js/jquery-3.6.3.min.js"></script>
+  <script src="/assets/js/jquery-ui.min.js"></script>
   <script src="/assets/js/sweetalert.min.js?240614"></script>
   <script src="/assets/js/bootstrap-auto-dark-mode.js"></script>
   <script src="/assets/js/chart.umd.js"></script>
