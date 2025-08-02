@@ -50,7 +50,11 @@ int main(int argc, char* argv[])
 
     int IsLoginEvent = GetSettings("loginevent", true);
     if (IsLoginEvent)
-        RCAgent("loginevent", User.GetName(), "");
+    {
+        std::string IPAddress = getenv("REMOTE_ADDR");
+        if (IPAddress == "::1") IPAddress = "localhost";
+        RCAgent("loginevent", User.GetName(), IPAddress);
+    }
 
     bool ChangePassword;
     std::ifstream fin(User.Data("ChangePassword"));

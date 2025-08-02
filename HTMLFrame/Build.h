@@ -1,4 +1,4 @@
-// Build 611
+// Build 613
 // Build.h : 定义程序Build信息
 
 // 版权声明：
@@ -7,7 +7,7 @@
 #ifndef _RCBUILD_
 #define _RCBUILD_
 
-#define PROGRAM_BUILD 611
-#define PROGRAM_BUILD_S "611"
+#define PROGRAM_BUILD 613
+#define PROGRAM_BUILD_S "613"
 
 #endif

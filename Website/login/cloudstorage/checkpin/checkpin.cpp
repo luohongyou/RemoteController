@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     int IsLoginEvent = GetSettings("loginevent", true);
     if (IsLoginEvent)
     {
-        std::string IPAddress;
+        std::string IPAddress = getenv("REMOTE_ADDR");
         if (IPAddress == "::1") IPAddress = "localhost";
         RCAgent("pinloginevent", "CloudStorageUser", IPAddress);
     }

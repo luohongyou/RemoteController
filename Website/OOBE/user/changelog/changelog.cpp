@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
     Source = R"(
 #Remote Controller 4.0 Beta 7 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2025/0x/xx)
 *新功能
-
+使用PIN登录共享云盘的用户界面现在得到了更新
+被控电脑的前台UI现在完全支持系统深色模式
 *Bug修复
 
 *已知问题

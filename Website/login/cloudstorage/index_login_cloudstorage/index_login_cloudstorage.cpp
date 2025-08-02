@@ -26,19 +26,146 @@ int main(int argc, char* argv[])
 
     HTML.Custom((std::string)R"(
 <style>
-  .code-input-container {
-    display: flex;
-  }
-  .code-input {
-    width: 50px;
-    height: 25px;
-    font-weight:700;
-    font-size:35px; 
-    margin: 0 3px;
-    text-align: center;
-    padding: .1rem .1rem !important; 
-  }
+
+    .pincontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: calc(15 / 6.0 * 1vw);
+    }
+ 
+    .codeBox {
+        width: calc(250 / 6.0 * 1vw);
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: calc(15 / 6.0 * 1vw);
+    }
+ 
+    .codeItem {
+        width: calc(50 / 6.0 * 1vw);
+        height: calc(50 / 6.0 * 1vw);
+        font-size: calc(24 / 6.0 * 1vw);
+        text-align: center;
+        line-height: calc(50 / 6.0 * 1vw);
+        border: calc(1 / 6.0 * 1vw) solid #ccc;
+        border-radius: calc(10 / 6.0 * 1vw);
+        transition: all 0.2s linear;
+        position: relative;
+    }
+ 
+    .codeInput {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+ 
+    .pincontainer span:nth-child(1) {
+        font-size: calc(20 / 6.0 * 1vw);
+        margin-bottom: calc(10 / 6.0 * 1vw);
+    }
+ 
+    .pincontainer span:nth-child(2) {
+        font-size: calc(12 / 6.0 * 1vw);
+        margin-bottom: calc(30 / 6.0 * 1vw);
+    }
+ 
+    .pincontainer :last-child ,.pincontainer span .phone{
+        font-size: calc(12 / 6.0 * 1vw);
+        color: rgb(105, 161, 230);
+    }
+ 
+    .active {
+        border: calc(3 / 6.0 * 1vw) solid rgb(105, 161, 230);
+    }
+ 
+    .codeItem.active::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(2 / 6.0 * 1vw);
+        height: calc(24 / 6.0 * 1vw);
+        background-color: black;
+        animation: blink 1s step-end infinite;
+    }
+
+@media (min-width: 992px) {
+    .pincontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: calc(15 / 12.0 * 1vw);
+    }
+ 
+    .codeBox {
+        width: calc(250 / 12.0 * 1vw);
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: calc(15 / 12.0 * 1vw);
+    }
+ 
+    .codeItem {
+        width: calc(50 / 12.0 * 1vw);
+        height: calc(50 / 12.0 * 1vw);
+        font-size: calc(24 / 12.0 * 1vw);
+        text-align: center;
+        line-height: calc(50 / 12.0 * 1vw);
+        border: calc(1 / 12.0 * 1vw) solid #ccc;
+        border-radius: calc(10 / 12.0 * 1vw);
+        transition: all 0.2s linear;
+        position: relative;
+    }
+ 
+    .codeInput {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+ 
+    .pincontainer span:nth-child(1) {
+        font-size: calc(20 / 12.0 * 1vw);
+        margin-bottom: calc(10 / 12.0 * 1vw);
+    }
+ 
+    .pincontainer span:nth-child(2) {
+        font-size: calc(12 / 12.0 * 1vw);
+        margin-bottom: calc(30 / 12.0 * 1vw);
+    }
+ 
+    .pincontainer :last-child ,.pincontainer span .phone{
+        font-size: calc(12 / 12.0 * 1vw);
+        color: rgb(105, 161, 230);
+    }
+ 
+    .active {
+        border: calc(3 / 12.0 * 1vw) solid rgb(105, 161, 230);
+    }
+ 
+    .codeItem.active::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(2 / 12.0 * 1vw);
+        height: calc(24 / 12.0 * 1vw);
+        background-color: black;
+        animation: blink 1s step-end infinite;
+    }
+}
+ 
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
 </style>
+
 <main id="main">
   <!-- ======= Portfolio Details Section ======= -->
   <section id="portfolio-details" class="portfolio-details">
@@ -57,17 +184,25 @@ int main(int argc, char* argv[])
             <h3>身份验证</h3>
             <ul>
 			  <p>请输入6位共享云盘PIN码，验证您的访问权限。</p>
-              <code class="form-floating mb-3">
-                <div class="code-input-container">
-                <input class="form-control form-control-lg rounded-3 text-primary code-input" maxlength="1" type="text" id="PIN1" >
-                <input class="form-control form-control-lg rounded-3 text-primary code-input" maxlength="1" type="text" id="PIN2" >
-                <input class="form-control form-control-lg rounded-3 text-primary code-input" maxlength="1" type="text" id="PIN3" >
-                <input class="form-control form-control-lg rounded-3 text-primary code-input" maxlength="1" type="text" id="PIN4" >
-                <input class="form-control form-control-lg rounded-3 text-primary code-input" maxlength="1" type="text" id="PIN5" >
-                <input class="form-control form-control-lg rounded-3 text-primary code-input" maxlength="1" type="text" id="PIN6" >
+              <div class="pincontainer">
+                <div class="codeBox">
+                    <div class="codeItem active"></div>
+                    <div class="codeItem"></div>
+                    <div class="codeItem"></div>
+                    <div class="codeItem"></div>
+                    <div class="codeItem"></div>
+                    <div class="codeItem"></div>
+                    <input type="text" class="codeInput" id="PIN" maxlength="6" type="number" />
                 </div>
-              </code>
-              &nbsp;<div class="spinner-border spinner-border text-primary" id="pinspinner" role="status" style="display:none"></div>
+              </div>
+
+              <div style="display:none" id="pinspinner">
+                <div class="d-flex align-items-center">
+                  <strong role="status">正在登录...</strong>
+                  <div class="spinner-border ms-auto" aria-hidden="true"></div>
+                </div>
+              </div>
+
             </ul>
           </div>
         </div>
@@ -79,58 +214,48 @@ int main(int argc, char* argv[])
 
     <script>
         if (getCookie("CORAL_REMOTE_CONTROLLER_MANAGE") != "") window.location.href = "/";
-        document.querySelectorAll('input[type="text"]').forEach((input, index) => {
-          input.addEventListener('input', (e) => {
-            var thisValue = document.querySelectorAll('input[type="text"]')[index].value;
-            if (!(0 <= thisValue && thisValue <= 9))
-              document.querySelectorAll('input[type="text"]')[index].value = "";
-          });
-          input.addEventListener('keydown', (e) => {
-            e.preventDefault();
-            if (e.key === 'Backspace') {
-              document.querySelectorAll('input[type="text"]')[index].value = "";
-              if (index > 0)
-                document.querySelectorAll('input[type="text"]')[index - 1].focus();
-            }
-            else if (e.key === 'Delete')
-                document.querySelectorAll('input[type="text"]')[index].value = "";
-            else if (e.keyCode >= 48 && e.keyCode <= 57) {
-              // e.preventDefault();
-              document.querySelectorAll('input[type="text"]')[index].value = e.keyCode - 48;
-              if (index < 5)
-                document.querySelectorAll('input[type="text"]')[index + 1].focus();
-              else {
-                  var hiddenInput = document.createElement('input');
-                  hiddenInput.type = 'text';
-                  hiddenInput.style.position = 'absolute';
-                  hiddenInput.style.left = '-9999px';
-                  hiddenInput.style.top = '-9999px';
-                  hiddenInput.style.opacity = '0';
-                  hiddenInput.tabIndex = -1;
-                  document.body.appendChild(hiddenInput);
-                  hiddenInput.focus();
-                  document.body.removeChild(hiddenInput);
-                  hiddenInput = null;
 
-                  setTimeout(CheckPIN(), 500);
-              }
+
+        const codeItems = document.querySelectorAll(".codeItem");
+        const inputBox = document.querySelector(".codeInput");
+        inputBox.focus();
+
+        inputBox.addEventListener("input", (e) => {
+            changeActiveItem();
+            updateCodeItem();
+ 
+            if (inputBox.value.length === 6) {
+                CheckPIN();
             }
-            else if (e.key === 'ArrowLeft' && index > 0) {
-              document.querySelectorAll('input[type="text"]')[index - 1].focus();
-            }
-            else if (e.key === 'ArrowRight' && index < 5) {
-              document.querySelectorAll('input[type="text"]')[index + 1].focus();
-            }
-          });
+ 
         });
 
+        function changeActiveItem() {
+            codeItems.forEach((item) => {
+                item.classList.remove("active");
+            });
+ 
+            const inputValue = inputBox.value.length;
+ 
+            if (inputValue === 0) {
+                codeItems[0].classList.add("active");
+            }
+ 
+            if (inputValue && inputValue < 6) {
+                codeItems[inputValue].classList.add("active");
+            }
+        }
+
+        function updateCodeItem() {
+            const arrCode = inputBox.value;
+            codeItems.forEach((item, index) => {
+                arrCode[index] ? item.innerText = arrCode[index] : item.innerText = "";
+            });
+        }
+
+
         function CheckPIN() {
-            var PIN = document.getElementById('PIN1').value + 
-                      document.getElementById('PIN2').value + 
-                      document.getElementById('PIN3').value + 
-                      document.getElementById('PIN4').value + 
-                      document.getElementById('PIN5').value + 
-                      document.getElementById('PIN6').value;
+            var PIN = document.getElementById('PIN').value;
             if (PIN.length == 6)
             {
                 var Token = GetTextByAJAX("/login/cloudstorage/checkpin.exe?" + PIN);
@@ -144,16 +269,13 @@ int main(int argc, char* argv[])
                         buttons: false,
                         dangerMode: true,
                     });
+                    document.getElementById('PIN').value = "";
+                    updateCodeItem();
                 }
                 else
                 {
 )" + (DataTracker ? R"(
-            document.getElementById('PIN1').disabled = true;
-            document.getElementById('PIN2').disabled = true;
-            document.getElementById('PIN3').disabled = true;
-            document.getElementById('PIN4').disabled = true;
-            document.getElementById('PIN5').disabled = true;
-            document.getElementById('PIN6').disabled = true;
+            document.getElementById('PIN').disabled = true;
             document.getElementById('pinspinner').style.display = "block"
             
             // Track User Data

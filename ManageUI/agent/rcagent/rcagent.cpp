@@ -500,13 +500,15 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance,
                 }
                 else if (Action == "loginevent")
                 {
+                    std::string IPAddress;
+                    tempIO >> IPAddress;
                     if (IsTray)
                     {
                         nid.uFlags = NIF_INFO | NIF_GUID;
                         nid.dwInfoFlags = NIIF_INFO | NIIF_RESPECT_QUIET_TIME;
-                        _tcscpy_s(nid.szInfo, S2WS("用户 " + User + " 已登录 Coral Remote Controller").c_str());
+                        _tcscpy_s(nid.szInfo, S2WS("位于 " + IPAddress + " 的用户 " + User + " 已登录 Coral Remote Controller").c_str());
                         _tcscpy_s(nid.szTip, ((std::wstring)L"Coral Remote Controller\n版本 " + _T(VERSION)).c_str());
-                        lstrcpy(nid.szInfoTitle, L"Remote Controller 用户登录");
+                        lstrcpy(nid.szInfoTitle, S2WS(User + " 已登录 Remote Controller").c_str());
                         Shell_NotifyIcon(NIM_MODIFY, &nid);
                     }
                 }
