@@ -15,6 +15,7 @@
 #define T_AUDIO 3
 #define T_PDF   5
 #define T_DOCX  6
+#define T_TEXT  7
 
 int main(int argc, char* argv[])
 {
@@ -58,12 +59,13 @@ int main(int argc, char* argv[])
 		extType = T_VIDEO;    // 视频
 	else if (ext == "wav" || ext == "mp3" || ext == "m4a" || ext == "flac")
 		extType = T_AUDIO;    // 音频
-	// else if (ext == ...) // 文本和源代码: 5KB
+	else if (ext == "txt" || ext == "log")
+		extType = T_TEXT;     // 文本
 	else if (ext == "pdf")
 		extType = T_PDF;      // PDF文档
 	else if (ext == "docx")
 		extType = T_DOCX;     // Word文档
-
+	// 文本和源代码: 5KB
 
 	if (extType == T_IMAGE || extType == T_VIDEO || extType == T_PDF || extType == T_DOCX)
 	{
@@ -104,10 +106,50 @@ int main(int argc, char* argv[])
 			AJAXOutput((std::string)"<!-- UseIframe -->/assets/vendor/previewhandler/docxjs/viewer_v2.html?file=/" + LocalFileName);
 
 	}
-	// else if (...)
-	else
+	else if (extType == T_TEXT) // TODO
 	{
-		AJAXOutput("暂不支持预览该文件");
+		std::ifstream fin(Address);
+		if (!fin.is_open())
+		{
+			AJAXOutput("加载文件预览失败");
+			HTML.Log("尝试远程预览文件失败<br>请求的文件：" + Address, "explorer", LL_ERROR);
+			return 0;
+		}
+
+		bool isZipped;
+
+		const size_t maxSize = 1024 * 1024; // 1MB
+		std::vector<char> buffer(maxSize);
+		fin.read(buffer.data(), maxSize);
+		size_t readSize = fin.gcount();
+		isZipped = !fin.eof();
+		fin.close();
+		buffer.resize(readSize);
+		
+		std::string Content(buffer.begin(), buffer.end()), outputContent;
+		Content = UTF_8ToGb2312(Content.c_str());
+
+		std::string Code;
+		if (isZipped)
+			Code = R"(<span class="badge text-bg-danger">文件过大，此处仅展示前1MB内容</span>)";
+		Code += R"(<textarea class="form-control" style="height:300px;" readonly>)" + Content + R"(</textarea>)";
+
+		AJAXOutput(Code);
+	}
+	// else if (...)
+	else // TODO
+	{
+		AJAXOutput((std::string)R"(
+<div align="center">
+	<h2>测试文件.file</h2>
+	<p><b>文件类型：</b>FILE文件</p>
+	<p><b>文件大小：</b>4 KB</p>
+	<p><b>修改时间：</b>2024-01-01 12:00:00</p>
+	<p><b>文件路径：</b>)" + Address + R"(</p>
+</div>
+)");
+
+		// AJAXOutput("暂不支持预览该文件");
 	}
 
 	return 0;
