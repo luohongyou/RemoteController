@@ -139,6 +139,7 @@ int main(int argc, char* argv[])
 	// else if (...)
 	else // TODO
 	{
+		/*
 		AJAXOutput((std::string)R"(
 <div align="center">
 	<h2>测试文件.file</h2>
@@ -147,9 +148,9 @@ int main(int argc, char* argv[])
 	<p><b>修改时间：</b>2024-01-01 12:00:00</p>
 	<p><b>文件路径：</b>)" + Address + R"(</p>
 </div>
-)");
+)");*/
 
-		// AJAXOutput("暂不支持预览该文件");
+		AJAXOutput("暂不支持预览该文件");
 	}
 
 	return 0;
