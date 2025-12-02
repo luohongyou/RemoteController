@@ -15,6 +15,38 @@
 
 namespace fs = std::filesystem;
 bool CopyDirectory(const fs::path& src_dir, const fs::path& dst_dir);
+std::string getAvailableFolderName(std::string OriginalFolderName, std::string Address)
+{
+	int cnt = 0;
+	std::string FolderNameNew = OriginalFolderName;
+	while (std::filesystem::exists(Address + FolderNameNew))
+		FolderNameNew = OriginalFolderName + " (" + Num2String(++cnt) + ")";
+	return FolderNameNew;
+}
+std::string getAvailableFileName(std::string OriginalFileName, std::string Address)
+{
+	int cnt = 0;
+	std::string Ext, DisplayName;
+	bool flag = 0;
+	for (int i = OriginalFileName.size() - 1; i >= 0; i--)
+		if (OriginalFileName[i] == '.')
+		{
+			Ext = "." + OriginalFileName.substr(i + 1);
+			DisplayName = OriginalFileName.substr(0, i);
+			flag = 1;
+			break;
+		}
+	if (!flag)
+	{
+		Ext = "";
+		DisplayName = OriginalFileName;
+	}
+
+	while (std::filesystem::exists(Address + OriginalFileName))
+		OriginalFileName = DisplayName + " (" + Num2String(++cnt) + ")" + Ext;
+
+	return OriginalFileName;
+}
 
 int main(int argc, char* argv[])
 {
@@ -87,11 +119,7 @@ int main(int argc, char* argv[])
 		if (fs::is_directory(Address))
 		{
 			std::string FolderName = fs::path(Address).filename().string();
-			std::string FolderNameNew = FolderName;
-
-			int cnt = 0;
-			while (std::filesystem::exists("storage\\sharedzone" + cloudAddress + FolderNameNew))
-				FolderNameNew = FolderName + " (" + Num2String(++cnt) + ")";
+			std::string FolderNameNew = getAvailableFolderName(FolderName, "storage\\sharedzone" + cloudAddress);
 
 			int ret = CopyDirectory(Address, "storage\\sharedzone" + cloudAddress + FolderNameNew);
 			if (!ret)
@@ -106,26 +134,8 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			int cnt = 0;
-			std::string Ext, DisplayName;
 			std::string FileName = fs::path(Address).filename().string();
-			bool flag = 0;
-			for (int i = FileName.size() - 1; i >= 0; i--)
-				if (FileName[i] == '.')
-				{
-					Ext = "." + FileName.substr(i + 1);
-					DisplayName = FileName.substr(0, i);
-					flag = 1;
-					break;
-				}
-			if (!flag)
-			{
-				Ext = "";
-				DisplayName = FileName;
-			}
-
-			while (std::filesystem::exists("storage\\sharedzone" + cloudAddress + FileName))
-				FileName = DisplayName + " (" + Num2String(++cnt) + ")" + Ext;
+			FileName = getAvailableFileName(FileName, "storage\\sharedzone" + cloudAddress);
 
 			int ret = CopyFileA(Address.c_str(), ("storage\\sharedzone" + cloudAddress + FileName).c_str(), FALSE);
 			if (!ret)
@@ -170,6 +180,7 @@ int main(int argc, char* argv[])
 			int ans = remove(Address.c_str());
 			if (ans == 0)
 			{
+				HTML.Log("已成功删除文件：" + Address, "explorer", LL_INFO);
 				printf("Yes");
 			}
 			else
@@ -217,7 +228,70 @@ int main(int argc, char* argv[])
 			HTML.Log("请求重命名文件失败<br>原名称：" + Address + "<br>新名称：" + NewAddress, "explorer", LL_ERROR);
 			printf("No");
 		}
-		break;
+	}
+	break;
+	case 6: // 粘贴(复制) 6+dest+source
+	case 7: // 粘贴(剪切) 7+dest+source
+	{
+		if (Address == "共享云盘")
+			Address = "storage\\sharedzone";
+		else if (IsCloudStorage)
+			Address = "storage\\sharedzone" + Address.substr(Address.find_first_of('\\'));
+		if (Address[Address.size() - 1] != '\\')
+			Address += "\\";
+
+		std::string source = UTF8ToANSI(decodeURI(HexDecode(argv[3])));
+		if (source == "共享云盘")
+			source = "storage\\sharedzone";
+		else if (source.substr(0, 8) == "共享云盘")
+			source = "storage\\sharedzone" + source.substr(source.find_first_of('\\'));
+
+		std::string FileName = source.substr(source.find_last_of('\\') + 1);
+		if (fs::is_directory(source))
+			FileName = getAvailableFolderName(FileName, Address);
+		else
+			FileName = getAvailableFileName(FileName, Address);
+
+		int ans;
+		if (fs::is_directory(source))
+		{
+			CreateDirectoryA((Address + FileName).c_str(), NULL);
+			ans = CopyDirectory(source, Address + FileName);
+		}
+		else
+			ans = CopyFileA(source.c_str(), (Address + FileName).c_str(), FALSE);
+
+		if (!ans)
+		{
+			HTML.Log("请求复制文件失败：无法复制文件<br>源位置：" + source + "<br>目标位置：" + Address + FileName, "explorer", LL_ERROR);
+			printf("No");
+			return 0;
+		}
+
+
+		if (Action == 7)
+		{
+			if (fs::is_directory(source))
+				ans = RemoveDir(source.c_str());
+			else
+				ans = (remove(source.c_str()) == 0);
+
+			if (ans && !fs::exists(source))
+			{
+				HTML.Log("已请求移动文件<br>源位置：" + source + "<br>目标位置：" + Address + FileName, "explorer", LL_INFO);
+				printf("Yes");
+			}
+			else
+			{
+				HTML.Log("请求移动文件失败：无法删除原文件<br>源位置：" + source + "<br>目标位置：" + Address + FileName, "explorer", LL_ERROR);
+				printf("No");
+			}
+		}
+		else
+		{
+			HTML.Log("已请求复制文件<br>源位置：" + source + "<br>目标位置：" + Address + FileName, "explorer", LL_INFO);
+			printf("Yes");
+		}
 	}
 
 	}

@@ -752,11 +752,39 @@ function File_Copy()
 }
 function File_Paste()
 {
-    InDev();
+    var _ClipBoardStatus = ClipBoardStatus;
 
-    // TODO
+    var AddressHex = HexEncode(encodeURI(Address));
+    var _FileName = decodeURI(HexDecode(ClipBoard));
+    _FileName = _FileName.substring(_FileName.lastIndexOf("\\") + 1);
 
-    if (ClipBoardStatus == 2)
+    $.ajax({
+        type:'post', 
+        url:(_ClipBoardStatus == 2 ? "/explorer/expactionhandler.exe?7+" : "/explorer/expactionhandler.exe?6+") + AddressHex + "+" + ClipBoard,
+        async:true,
+        dataType:'text',
+        data:'',
+        success:function(res) {
+            if (res != "Yes")
+            {
+                if (_ClipBoardStatus == 2)
+                    notyf.error("移动 " + _FileName + " 时出现错误");
+                else
+                    notyf.error("复制 " + _FileName + " 时出现错误");
+            }
+            else
+            {
+                if (_ClipBoardStatus == 2)
+                    notyf.success("成功移动了 " + _FileName);
+                else
+                    notyf.success("成功复制了 " + _FileName);
+
+            }
+            RefreshFileList();
+        }
+    });
+
+    if (_ClipBoardStatus == 2)
         flushClipboard();
 }
 function File_Rename()
