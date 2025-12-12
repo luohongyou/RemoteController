@@ -1,6 +1,8 @@
 # Coral Remote Controller
 Coral Remote Controller是一个用于在浏览器端对局域网内单个Windows计算机进行有限远程控制的实用程序。
 
+![English](README-en.md)
+
 ![Remote Controller 主页](main.png)
 ## 简介
 ### 功能
