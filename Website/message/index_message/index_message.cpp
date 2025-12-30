@@ -23,9 +23,15 @@ int main(int argc, char* argv[])
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#single-pane" role="tab">单向通知</a>
           </li>
+)"
+#ifndef V4_RELEASE
++ R"(
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#double-pane" role="tab">双向消息</a>
           </li>
+)"
+#endif
++ R"(
         </ul>
 
         <br>
@@ -69,11 +75,15 @@ int main(int argc, char* argv[])
           </div>
 
           </div>
-
+)"
+#ifndef V4_RELEASE
++ R"(
           <div class="tab-pane fade" id="double-pane" role="tabpanel" tabindex="1">
             In Development. Coming Soon.
           </div>
-
+)"
+#endif
++ R"(
         </div>
     </div>
 

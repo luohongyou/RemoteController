@@ -23,9 +23,15 @@ int main(int argc, char* argv[])
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#rule-pane" role="tab">域名规则</a>
           </li>
+)"
+#ifndef V4_RELEASE
++ R"(
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#todo-pane" role="tab">IN DEV</a>
           </li>
+)"
+#endif
++ R"(
         </ul>
 
         <br>
@@ -37,11 +43,15 @@ int main(int argc, char* argv[])
             </div>
             <div id="rulelist" style="height:300px; overflow:auto;"></div>
           </div>
-
+)"
+#ifndef V4_RELEASE
++ R"(
           <div class="tab-pane fade" id="todo-pane" role="tabpanel" tabindex="1">
             In Development. Coming Soon.
           </div>
-
+)"
+#endif
++ R"(
         </div>
     </div>
 

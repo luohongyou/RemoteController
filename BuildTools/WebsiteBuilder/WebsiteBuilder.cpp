@@ -49,9 +49,11 @@ int main()
     RCCopyFileA("index_command.exe", (ReleaseFolder + "command\\index.exe").c_str(), false);
     RCCopyFileA("batchfilehandler.exe", (ReleaseFolder + "command\\batchfilehandler.exe").c_str(), false);
 
+#ifndef V4_RELEASE
     // datapush
     CreateDirectoryA((ReleaseFolder + "datapush").c_str(), NULL);
     RCCopyFileA("index_datapush.exe", (ReleaseFolder + "datapush\\index.exe").c_str(), false);
+#endif
 
     // login
     CreateDirectoryA((ReleaseFolder + "login").c_str(), NULL);
@@ -217,7 +219,9 @@ int main()
     // messager
     CreateDirectoryA((ReleaseFolder + "..\\..\\ManageUI\\messager").c_str(), NULL);
     RCCopyFileA("onewaymessager.exe", (ReleaseFolder + "..\\..\\ManageUI\\messager\\onewaymessager.exe").c_str(), false);
+#ifndef V4_RELEASE
     RCCopyFileA("chatapp.exe", (ReleaseFolder + "..\\..\\ManageUI\\messager\\chatapp.exe").c_str(), false);
+#endif
     RCCopyFileA("WebView2Loader.dll", (ReleaseFolder + "..\\..\\ManageUI\\messager\\WebView2Loader.dll").c_str(), false);
     // ui
     CreateDirectoryA((ReleaseFolder + "..\\..\\ManageUI\\ui").c_str(), NULL);

@@ -6,11 +6,12 @@
 #ifndef RC_HTMLFRAME
 #define RC_HTMLFRAME
 
-#define BETA
+// #define BETA
+#define V4_RELEASE
 
-#define VERSION "4.0 Beta 7"
-#define BRANCH "rc_vnext_beta"
-#define OOBEVERSION 12
+#define VERSION "4.0 RC 1"
+#define BRANCH "rc_release"
+#define OOBEVERSION 13
 
 #pragma warning(disable: 4251)
 #include "cgicc/Cgicc.h"

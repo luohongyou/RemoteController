@@ -66,7 +66,9 @@ int main(int argc, char* argv[])
     ToolCards.Add("文件管理", "浏览和管理远程计算机上的所有文件，并可轻松上传和下载文件。", "/explorer", "bi bi-folder2-open");
     ToolCards.Add("实时屏幕", "查看远程计算机实时的屏幕图像，并可以截取屏幕和查看之前的截图。", "/screenshot", "bi bi-display");
     ToolCards.Add("剪贴板", "获取和更改远程计算机实时的剪贴板数据，并可查看剪贴板历史记录。", "/clipboard", "bi bi-clipboard-data");
+#ifndef V4_RELEASE
     ToolCards.Add("内容推送", "向远程计算机的前端界面推送自定义的照片、视频、音频、网页等内容。", "/datapush", "bi bi-file-arrow-up");
+#endif
     ToolCards.Add("执行命令", "在远程计算机上以各种权限与各种交互方式运行自定义的脚本指令。", "/command", "bi bi-terminal-plus");
     ToolCards.Add("发送消息", "向远程计算机前端界面发送自定义信息，支持多种显示模式。", "/message", "bi bi-chat-left-text");
     ToolCards.Add("网络设置", "更改远程计算机上的hosts信息，可实现域名黑名单和手动链接域名至指定服务器。", "/network", "bi bi-globe2");

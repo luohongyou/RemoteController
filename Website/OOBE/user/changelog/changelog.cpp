@@ -20,17 +20,19 @@ int main(int argc, char* argv[])
     std::stringstream tempIO;
 
     Source = R"(
-#Remote Controller 4.0 Beta 7 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2025/12/02)
+#Remote Controller 4.0 Release Candidate 1 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2025/12/30)
+*Bug修复
+改进了PIN登录界面，将其回滚为了稳定的传统样式
+*已知问题
+若在文件管理处于加载文件夹内容的状态时，仍可请求打开其他文件夹，导致显示内容冲突
+预览特定编码的文本文件时可能出现乱码
+
+#Remote Controller 4.0 Beta 7 Build 621 (2025/12/02)
 *新功能
 文件管理模块现在支持复制剪切和粘贴文件
 文件管理模块初步引入了对文本文件的预览功能
 使用PIN登录共享云盘的用户界面现在得到了更新
 被控电脑的前台UI现在完全支持系统深色模式
-*已知问题
-新的身份验证管理器还未迁移为系统服务，在前台用户没有登录时可能不会运行，导致身份验证失败
-若在文件管理处于加载文件夹内容的状态时，仍可请求打开其他文件夹，导致显示内容冲突
-预览特定编码的文本文件时可能出现乱码
-新的PIN界面仍有光标显示异常的问题
 
 #Remote Controller 4.0 Beta 6 Build 600 (2025/06/21)
 *新功能

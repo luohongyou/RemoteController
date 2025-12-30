@@ -223,7 +223,7 @@ void HTMLFrame::Register(int _PageType,
     // 设置菜单栏
     if (User.GetGUID() != "")
         if (!User.IsCloudStorageUser())
-        FeatureList = R"(
+        FeatureList = (std::string)R"(
         <ul>
           <li><a class="nav-link" href="/">主页</a></li>
           <li class="dropdown"><a href="javascript:void(0) "><span>工具</span> <i class="bi bi-chevron-down"></i></a>
@@ -234,7 +234,13 @@ void HTMLFrame::Register(int _PageType,
               <li><a href="/explorer">文件管理</a></li>
               <li><a href="/screenshot">实时屏幕</a></li>
               <li><a href="/clipboard">剪贴板</a></li>
+)"
+#ifndef V4_RELEASE
++ R"(
               <li><a href="/datapush">内容推送</a></li>
+)"
+#endif
++ R"(
               <li><a href="/command">执行命令</a></li>
               <li><a href="/message">发送消息</a></li>
               <li><a href="/network">网络设置</a></li>

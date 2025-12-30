@@ -25,9 +25,15 @@ int main(int argc, char* argv[])
           <li class="nav-item">
             <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#task-list" role="tab">进程列表</a>
           </li>
+)"
+#ifndef V4_RELEASE
++ R"(
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#task-rules" role="tab">进程策略</a>
           </li>
+)"
+#endif
++ R"(
         </ul>
 
         <br>
@@ -39,7 +45,9 @@ int main(int argc, char* argv[])
 			</div>)") + R"(
             <div id="tasklist" style="overflow:auto; height:500px"></div>
           </div>
-
+)" 
+#ifndef V4_RELEASE
++ R"(
           <div class="tab-pane fade" id="task-rules" role="tabpanel" tabindex="1">
            In Development. Coming Soon.
             <div class="row">
@@ -77,6 +85,9 @@ int main(int argc, char* argv[])
             </div>
 
           </div>
+)"
+#endif
++ R"(
 
         </div>
     </div>

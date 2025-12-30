@@ -11,7 +11,7 @@
 #pragma comment(lib, "../../x64/Release/HTMLFrame.lib")
 
 std::string PackageFolder = "D:\\Websites\\Coral Remote Controller\\";
-std::string ReleaseFolder = "E:\\项目\\Packages\\";
+std::string ReleaseFolder = "D:\\";
 bool RCError = 0;
 
 void RCCopyFileA(LPCSTR lpExistingFileName, LPCSTR lpNewFileName, BOOL bFailIfExists);

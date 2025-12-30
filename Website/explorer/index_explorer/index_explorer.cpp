@@ -36,9 +36,6 @@ int main(int argc, char* argv[])
               <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#download-pane" role="tab">下载列表</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#task-pane" role="tab">操作列表</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#clipboard-pane" role="tab">剪贴板</a>
             </li>
           </ul>
@@ -51,12 +48,7 @@ int main(int argc, char* argv[])
               <table id="downloadlist" class="table table-hover table-borderless" style="font-size:14px;"></table>
             </div>
 
-            <div class="tab-pane fade" id="task-pane" role="tabpanel" tabindex="1">
-              <div id="tasknone" align="center" style="font-size:14px;">暂无正在进行的文件操作</div>
-              <table id="tasklist" class="table table-hover table-borderless" style="font-size:14px;"></table>
-            </div>
-
-            <div class="tab-pane fade" id="clipboard-pane" role="tabpanel" tabindex="2">
+            <div class="tab-pane fade" id="clipboard-pane" role="tabpanel" tabindex="1">
               <div id="clipboarddata" align="center" style="font-size:14px;">文件剪贴板为空</div>
               <br>
             </div>

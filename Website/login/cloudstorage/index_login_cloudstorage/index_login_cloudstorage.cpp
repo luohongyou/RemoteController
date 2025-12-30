@@ -25,147 +25,6 @@ int main(int argc, char* argv[])
     int DataTracker = GetSettings("DataTracker", true);
 
     HTML.Custom((std::string)R"(
-<style>
-
-    .pincontainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: calc(15 / 6.0 * 1vw);
-    }
- 
-    .codeBox {
-        width: calc(250 / 6.0 * 1vw);
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        margin-bottom: calc(15 / 6.0 * 1vw);
-    }
- 
-    .codeItem {
-        width: calc(50 / 6.0 * 1vw);
-        height: calc(50 / 6.0 * 1vw);
-        font-size: calc(24 / 6.0 * 1vw);
-        text-align: center;
-        line-height: calc(50 / 6.0 * 1vw);
-        border: calc(1 / 6.0 * 1vw) solid #ccc;
-        border-radius: calc(10 / 6.0 * 1vw);
-        transition: all 0.2s linear;
-        position: relative;
-    }
- 
-    .codeInput {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        opacity: 0;
-    }
- 
-    .pincontainer span:nth-child(1) {
-        font-size: calc(20 / 6.0 * 1vw);
-        margin-bottom: calc(10 / 6.0 * 1vw);
-    }
- 
-    .pincontainer span:nth-child(2) {
-        font-size: calc(12 / 6.0 * 1vw);
-        margin-bottom: calc(30 / 6.0 * 1vw);
-    }
- 
-    .pincontainer :last-child ,.pincontainer span .phone{
-        font-size: calc(12 / 6.0 * 1vw);
-        color: rgb(105, 161, 230);
-    }
- 
-    .active {
-        border: calc(3 / 6.0 * 1vw) solid rgb(105, 161, 230);
-    }
- 
-    .codeItem.active::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: calc(2 / 6.0 * 1vw);
-        height: calc(24 / 6.0 * 1vw);
-        background-color: black;
-        animation: blink 1s step-end infinite;
-    }
-
-@media (min-width: 992px) {
-    .pincontainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: calc(15 / 12.0 * 1vw);
-    }
- 
-    .codeBox {
-        width: calc(250 / 12.0 * 1vw);
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        margin-bottom: calc(15 / 12.0 * 1vw);
-    }
- 
-    .codeItem {
-        width: calc(50 / 12.0 * 1vw);
-        height: calc(50 / 12.0 * 1vw);
-        font-size: calc(24 / 12.0 * 1vw);
-        text-align: center;
-        line-height: calc(50 / 12.0 * 1vw);
-        border: calc(1 / 12.0 * 1vw) solid #ccc;
-        border-radius: calc(10 / 12.0 * 1vw);
-        transition: all 0.2s linear;
-        position: relative;
-    }
- 
-    .codeInput {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        opacity: 0;
-    }
- 
-    .pincontainer span:nth-child(1) {
-        font-size: calc(20 / 12.0 * 1vw);
-        margin-bottom: calc(10 / 12.0 * 1vw);
-    }
- 
-    .pincontainer span:nth-child(2) {
-        font-size: calc(12 / 12.0 * 1vw);
-        margin-bottom: calc(30 / 12.0 * 1vw);
-    }
- 
-    .pincontainer :last-child ,.pincontainer span .phone{
-        font-size: calc(12 / 12.0 * 1vw);
-        color: rgb(105, 161, 230);
-    }
- 
-    .active {
-        border: calc(3 / 12.0 * 1vw) solid rgb(105, 161, 230);
-    }
- 
-    .codeItem.active::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: calc(2 / 12.0 * 1vw);
-        height: calc(24 / 12.0 * 1vw);
-        background-color: black;
-        animation: blink 1s step-end infinite;
-    }
-}
- 
-    @keyframes blink {
-        50% {
-            opacity: 0;
-        }
-    }
-</style>
-
 <main id="main">
   <!-- ======= Portfolio Details Section ======= -->
   <section id="portfolio-details" class="portfolio-details">
@@ -184,18 +43,13 @@ int main(int argc, char* argv[])
             <h3>身份验证</h3>
             <ul>
 			  <p>请输入6位共享云盘PIN码，验证您的访问权限。</p>
-              <div class="pincontainer">
-                <div class="codeBox">
-                    <div class="codeItem active"></div>
-                    <div class="codeItem"></div>
-                    <div class="codeItem"></div>
-                    <div class="codeItem"></div>
-                    <div class="codeItem"></div>
-                    <div class="codeItem"></div>
-                    <input type="text" class="codeInput" id="PIN" maxlength="6" type="number" />
+              <form class="rcpinlogin">
+                <div class="form-floating mb-3">
+                  <input class="form-control form-control-lg rounded-3 text-primary" type="number" id="PIN">
+                  <label for="PIN">PIN</label>
                 </div>
-              </div>
-
+                <button type="submit" class="btn btn-primary" id="submitbutton">确定</button>
+              </form>
               <div style="display:none" id="pinspinner">
                 <div class="d-flex align-items-center">
                   <strong role="status">正在登录...</strong>
@@ -215,44 +69,10 @@ int main(int argc, char* argv[])
     <script>
         if (getCookie("CORAL_REMOTE_CONTROLLER_MANAGE") != "") window.location.href = "/";
 
-
-        const codeItems = document.querySelectorAll(".codeItem");
-        const inputBox = document.querySelector(".codeInput");
-        inputBox.focus();
-
-        inputBox.addEventListener("input", (e) => {
-            changeActiveItem();
-            updateCodeItem();
- 
-            if (inputBox.value.length === 6) {
-                CheckPIN();
-            }
- 
-        });
-
-        function changeActiveItem() {
-            codeItems.forEach((item) => {
-                item.classList.remove("active");
-            });
- 
-            const inputValue = inputBox.value.length;
- 
-            if (inputValue === 0) {
-                codeItems[0].classList.add("active");
-            }
- 
-            if (inputValue && inputValue < 6) {
-                codeItems[inputValue].classList.add("active");
-            }
-        }
-
-        function updateCodeItem() {
-            const arrCode = inputBox.value;
-            codeItems.forEach((item, index) => {
-                arrCode[index] ? item.innerText = arrCode[index] : item.innerText = "";
-            });
-        }
-
+        $('.rcpinlogin').on('submit',function(e){
+            e.preventDefault();
+            CheckPIN();
+        })
 
         function CheckPIN() {
             var PIN = document.getElementById('PIN').value;
@@ -276,6 +96,7 @@ int main(int argc, char* argv[])
                 {
 )" + (DataTracker ? R"(
             document.getElementById('PIN').disabled = true;
+            document.getElementById('submitbutton').style.display = "none"
             document.getElementById('pinspinner').style.display = "block"
             
             // Track User Data
