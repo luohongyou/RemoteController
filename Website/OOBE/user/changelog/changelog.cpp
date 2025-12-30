@@ -20,12 +20,17 @@ int main(int argc, char* argv[])
     std::stringstream tempIO;
 
     Source = R"(
-#Remote Controller 4.0 Release Candidate 1 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2025/12/30)
+#Remote Controller 4.0 Release Candidate 2 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2025/12/31)
 *Bug修复
-改进了PIN登录界面，将其回滚为了稳定的传统样式
+修复了后台管理页面菜单栏项目显示错误的问题
+修复了关闭系统后管理员无法登录的问题
 *已知问题
 若在文件管理处于加载文件夹内容的状态时，仍可请求打开其他文件夹，导致显示内容冲突
 预览特定编码的文本文件时可能出现乱码
+
+#Remote Controller 4.0 Release Candidate 1 Build 631 (2025/12/30)
+*Bug修复
+改进了PIN登录界面，将其回滚为了稳定的传统样式
 
 #Remote Controller 4.0 Beta 7 Build 621 (2025/12/02)
 *新功能

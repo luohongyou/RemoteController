@@ -68,13 +68,13 @@ void HTMLFrame::Register(int _PageType,
     {
         bool DisableFlag = 0;
 
-        if ((Link != "/login/" &&
+        if ((Link != "/login/" && Link != "/login/RSAPublicKey.exe" &&
             Link.substr(0, 12) != "/manage/main" &&
             Link.substr(0, 5) != "/OOBE"))
         {
             DisableFlag = 1;
         }
-        else if (Link != "/login/" && User.GetUserType() > UT_ADMIN)
+        else if (Link != "/login/" && Link != "/login/RSAPublicKey.exe" && User.GetUserType() > UT_ADMIN)
         {
             DisableFlag = 1;
         }
@@ -291,7 +291,13 @@ void HTMLFrame::ManageInit()
               <li><a href="/explorer">文件管理</a></li>
               <li><a href="/screenshot">实时屏幕</a></li>
               <li><a href="/clipboard">剪贴板</a></li>
+)"
+#ifndef V4_RELEASE
++ R"(
               <li><a href="/datapush">内容推送</a></li>
+)"
+#endif
++ R"(
               <li><a href="/command">执行命令</a></li>
               <li><a href="/message">发送消息</a></li>
               <li><a href="/network">网络设置</a></li>
