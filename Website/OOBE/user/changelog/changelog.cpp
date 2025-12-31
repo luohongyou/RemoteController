@@ -37,6 +37,8 @@ int main(int argc, char* argv[])
 *Bug修复
 修复了文件管理处于加载文件夹内容的状态时仍可请求打开其他文件夹的问题
 修复了文件管理预览文本文件可能出现乱码的问题
+修复了文件管理在上传文件时文件名出现错误的问题
+修复了共享云盘临时用户可能越权的漏洞
 
 #Remote Controller 4.0 Release Candidate 2 Build 635 (2025/12/31)
 *Bug修复

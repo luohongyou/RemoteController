@@ -960,6 +960,7 @@ function explorerUpload(e) {
     e.preventDefault();
 
     var file = document.getElementById('expformFile').files[0];
+    var filename = file.name;
 
     if (file.size / 1024 / 1024 / 1024 > 4)
     {
@@ -980,7 +981,7 @@ function explorerUpload(e) {
     formData.append("file", file);
 
     $.ajax({
-        url: '/explorer/expuploadhandler.exe?' + HexEncode(encodeURI(Address)),
+        url: '/explorer/expuploadhandler.exe?' + HexEncode(encodeURI(Address)) + '+' + HexEncode(encodeURIComponent(filename)),
         type: 'POST',
         cache: false,
         data: formData,

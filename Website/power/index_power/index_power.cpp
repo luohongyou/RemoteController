@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
 )" + (HTML.User.IsForegroundUser() ? R"(<p><b class="text-danger">不支持使用前台用户锁定当前计算机。</b></p>)" : "") + R"(
             <button class="btn btn-)" + (BlackScreenFlag ? "warning" : "danger") + R"(" type="button" onclick="LockPC() " id="LockButton" )" + (HTML.User.GetUserType() == UT_GUEST || HTML.User.IsForegroundUser() ? "disabled" : "") + R"(>)" + (BlackScreenFlag ? "解锁" : "锁定") + R"(远程计算机</button>
             <div id="lockpcactions" )" + (BlackScreenFlag ? R"(style="display:none")" : "") + R"(>
-              <div class="form-check">
+              <div class="form-check" style="margin-top:10px">
                 <input class="form-check-input" type="checkbox" id="IsCloseAll" )" + (HTML.User.GetUserType() == UT_GUEST || HTML.User.IsForegroundUser() ? "disabled" : "") + R"(>
                 <label class="form-check-label" for="IsCloseAll">同时强制关闭所有窗口</label>
               </div>

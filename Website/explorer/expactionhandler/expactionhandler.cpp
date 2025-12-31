@@ -15,6 +15,7 @@
 
 namespace fs = std::filesystem;
 bool CopyDirectory(const fs::path& src_dir, const fs::path& dst_dir);
+bool CloudCheckAddress(std::string Address);
 std::string getAvailableFolderName(std::string OriginalFolderName, std::string Address)
 {
 	int cnt = 0;
@@ -73,6 +74,12 @@ int main(int argc, char* argv[])
 		HTML.Log("用户尝试操作非法路径", "explorer", LL_ERROR);
 		return 0;
 	}
+	if (!CloudCheckAddress(Address) && HTML.User.IsCloudStorageUser())
+	{
+		HTML.Log("用户没有权限操作远程计算机的本地文件", "explorer", LL_ERROR);
+		printf("No");
+		return 0;
+	}
 
 	int IsCloudStorage = (Address.substr(0, 8) == "共享云盘");
 	if (!IsCloudStorage && !fs::exists(Address) && Action != 4)
@@ -112,6 +119,8 @@ int main(int argc, char* argv[])
 		std::ofstream fout;
 		std::string cloudAddress = UTF8ToANSI(decodeURI(HexDecode(argv[3])));
 		if (!ExpCheckAddress(cloudAddress))
+			return 0;
+		if (!CloudCheckAddress(cloudAddress))
 			return 0;
 		if (cloudAddress[cloudAddress.size() - 1] != '\\')
 			cloudAddress += "\\";
@@ -195,7 +204,7 @@ int main(int argc, char* argv[])
 			Address = "storage\\sharedzone" + Address.substr(Address.find_first_of('\\'));
 		if (fs::exists(Address))
 		{
-			HTML.Log("用户尝试操作不存在的文件夹", "explorer", LL_ERROR);
+			HTML.Log("用户尝试重复创建同名文件夹", "explorer", LL_ERROR);
 			printf("No");
 			break;
 		}
@@ -233,6 +242,15 @@ int main(int argc, char* argv[])
 	case 6: // 粘贴(复制) 6+dest+source
 	case 7: // 粘贴(剪切) 7+dest+source
 	{
+		std::string source = UTF8ToANSI(decodeURI(HexDecode(argv[3])));
+
+		if ((!ExpCheckAddress(source) || !CloudCheckAddress(source)) && HTML.User.IsCloudStorageUser())
+		{
+			HTML.Log("用户没有权限操作远程计算机的本地文件", "explorer", LL_ERROR);
+			printf("No");
+			return 0;
+		}
+
 		if (Address == "共享云盘")
 			Address = "storage\\sharedzone";
 		else if (IsCloudStorage)
@@ -240,7 +258,6 @@ int main(int argc, char* argv[])
 		if (Address[Address.size() - 1] != '\\')
 			Address += "\\";
 
-		std::string source = UTF8ToANSI(decodeURI(HexDecode(argv[3])));
 		if (source == "共享云盘")
 			source = "storage\\sharedzone";
 		else if (source.substr(0, 8) == "共享云盘")
@@ -321,5 +338,11 @@ bool CopyDirectory(const fs::path& src_dir, const fs::path& dst_dir)
 		}
 	}
 
+	return true;
+}
+bool CloudCheckAddress(std::string Address)
+{
+	if (Address.substr(0, 8) != "共享云盘")
+		return false;
 	return true;
 }

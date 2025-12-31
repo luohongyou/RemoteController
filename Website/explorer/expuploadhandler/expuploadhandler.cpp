@@ -29,10 +29,11 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	if (argc != 2)
+	if (argc != 3)
 		return 0;
 
 	std::string Address = UTF8ToANSI(decodeURI(HexDecode(argv[1])));
+	std::string FileName = UTF8ToANSI(decodeURI(HexDecode(argv[2])));
 	if (!ExpCheckAddress(Address))
 	{
 		HTML.Log("用户尝试操作非法路径", "explorer", LL_ERROR);
@@ -71,7 +72,9 @@ int main(int argc, char* argv[])
 	puts("Content-type: text/html\n");
 
 	cgicc::const_file_iterator file = HTML.cgi.getFile("file");
-	std::string FileName = UTF8ToANSI(file->getFilename().c_str());
+	// std::string FileName = UTF8ToANSI(file->getFilename().c_str());
+	if (FileName[FileName.size() - 1] == '\n')
+		FileName = FileName.substr(0, FileName.size() - 1);
 
 	int cnt = 0;
 	std::string Ext, DisplayName;
@@ -113,7 +116,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		HTML.Log("远程上传文件失败<br>请求的文件：" + Address + file->getFilename(), "explorer", LL_ERROR);
+		HTML.Log("远程上传文件失败<br>请求的文件：" + FileName, "explorer", LL_ERROR);
 		printf("No");
 	}
 
