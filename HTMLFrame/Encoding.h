@@ -47,6 +47,7 @@ void Gb2312ToUnicode(WCHAR* pOut, char* gbBuffer);
 void UTF_8ToUnicode(std::wstring& pOut, const std::string& pText);
 void UnicodeToUTF_8(char* pOut, WCHAR* pText);
 std::wstring ANSI2Unicode(const std::string& str);
+bool IsUTF8(const void* pBuffer, int size);
 
 // CRC32
 void Init_CRC32_Tab();

@@ -1,7 +1,7 @@
-// BuildUpdater.cpp : ¸üĞÂBuildĞÅÏ¢¡£
+ï»¿// BuildUpdater.cpp : æ›´æ–°Buildä¿¡æ¯ã€‚
 
-// °æÈ¨ÉùÃ÷£º
-// Copyright (C) 2020-2024 Coral Studio. All Rights Reserved.
+// ç‰ˆæƒå£°æ˜ï¼š
+// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
 
 #include <iostream>
 #include <fstream>
@@ -10,11 +10,11 @@ using namespace std;
 int main()
 {
 	char strModule[256];
-	GetModuleFileName(NULL, strModule, 256);
+	GetModuleFileNameA(NULL, strModule, 256);
 	std::string a;
 	a.assign(strModule);
 	a.append("\\..\\");
-	SetCurrentDirectory(a.c_str());
+	SetCurrentDirectoryA(a.c_str());
 
 	string temp;
 	int build;
@@ -25,10 +25,10 @@ int main()
 	ofstream fout("Build.h");
 	fout << "// Build " << build + 1;
 	fout << R"(
-// Build.h : ¶¨Òå³ÌĞòBuildĞÅÏ¢
+// Build.h : å®šä¹‰ç¨‹åºBuildä¿¡æ¯
 
-// °æÈ¨ÉùÃ÷£º
-// Copyright (C) 2020-2024 Coral Studio. All Rights Reserved.
+// ç‰ˆæƒå£°æ˜ï¼š
+// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
 
 #ifndef _RCBUILD_
 #define _RCBUILD_

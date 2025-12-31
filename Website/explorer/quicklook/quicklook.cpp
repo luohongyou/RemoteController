@@ -7,6 +7,9 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <locale>
+#include <boost\locale.hpp>
+#include <boost/locale/encoding.hpp>
 #include "../../../HTMLFrame/HTMLFrame.h"
 #pragma comment(lib, "../../../x64/Release/HTMLFrame.lib")
 
@@ -106,9 +109,9 @@ int main(int argc, char* argv[])
 			AJAXOutput((std::string)"<!-- UseIframe -->/assets/vendor/previewhandler/docxjs/viewer_v2.html?file=/" + LocalFileName);
 
 	}
-	else if (extType == T_TEXT) // TODO
+	else if (extType == T_TEXT)
 	{
-		std::ifstream fin(Address);
+		std::ifstream fin(Address, std::ios::binary);
 		if (!fin.is_open())
 		{
 			AJAXOutput("加载文件预览失败");
@@ -125,16 +128,35 @@ int main(int argc, char* argv[])
 		isZipped = !fin.eof();
 		fin.close();
 		buffer.resize(readSize);
-		
-		std::string Content(buffer.begin(), buffer.end()), outputContent;
-		Content = UTF_8ToGb2312(Content.c_str());
 
 		std::string Code;
+		std::string Content(buffer.begin(), buffer.end());
+
+		if (!IsUTF8(Content.c_str(), Content.size()))
+		{
+			try {
+				std::string utf8_content = boost::locale::conv::between(Content, "UTF_8", "GB2312");
+				Content = utf8_content;
+			}
+			catch (const boost::locale::conv::conversion_error& e) {
+				AJAXOutput("加载文件预览失败");
+				HTML.Log("尝试远程预览文件失败<br>请求的文件：" + Address, "explorer", LL_ERROR);
+				return 0;
+			}
+		}
+
+		size_t pos = 0;
+		while ((pos = Content.find("\r\n", pos)) != std::string::npos) {
+			Content.replace(pos, 2, "\n");
+			pos += 1;
+		}
+
 		if (isZipped)
 			Code = R"(<span class="badge text-bg-danger">文件过大，此处仅展示前1MB内容</span>)";
 		Code += R"(<textarea class="form-control" style="height:300px;" readonly>)" + Content + R"(</textarea>)";
 
-		AJAXOutput(Code);
+		puts("Content-type: text/html; charset=UTF-8\n");
+		puts(Code.c_str());
 	}
 	// else if (...)
 	else // TODO

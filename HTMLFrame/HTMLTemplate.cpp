@@ -59,7 +59,7 @@ std::string HTMLFrame::OutputFrameCode(int _PageType, std::string _CustomCode)
   <script src="/assets/js/jquery-3.6.3.min.js"></script>
   <script src="/assets/js/sweetalert.min.js?240614"></script>
   <script src="/assets/js/bootstrap-auto-dark-mode.js"></script>
-  <script src="/assets/js/chart.umd.js"></script>
+  <!-- <script src="/assets/js/chart.umd.js"></script> -->
   <script src="/assets/js/browser.min.js"></script>
   <script src="/assets/js/HTMLFrame.js?version=)" + PROGRAM_BUILD_S + R"("></script>
   <script src="/assets/vendor/notyf/notyf.min.js"></script>

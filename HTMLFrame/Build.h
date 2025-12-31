@@ -1,13 +1,13 @@
-// Build 637
+// Build 643
 // Build.h : 定义程序Build信息
 
 // 版权声明：
-// Copyright (C) 2020-2024 Coral Studio. All Rights Reserved.
+// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
 
 #ifndef _RCBUILD_
 #define _RCBUILD_
 
-#define PROGRAM_BUILD 637
-#define PROGRAM_BUILD_S "637"
+#define PROGRAM_BUILD 643
+#define PROGRAM_BUILD_S "643"
 
 #endif

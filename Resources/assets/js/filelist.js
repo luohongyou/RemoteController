@@ -317,6 +317,7 @@ function ShowFileListLoading()
 }
 function ChangeFileListText(id, address)
 {
+    document.getElementById("address").setAttribute("readonly", "readonly");
     var TimerID = setTimeout("ShowFileListLoading()", 100);
     $.ajax({
         type:'post', 
@@ -324,8 +325,21 @@ function ChangeFileListText(id, address)
         async:true,
         dataType:'text',
         data:'',
+        error:function(xhr, status, error)
+        {
+            clearTimeout(TimerID);
+            document.getElementById("address").removeAttribute("readonly");
+            swal({
+              title: "无法打开文件夹",
+              text: "打开文件夹时出现了错误。",
+              icon: "error",
+              buttons: false,
+              dangerMode: true,
+            });
+        },
         success:function(res) {
             clearTimeout(TimerID);
+            document.getElementById("address").removeAttribute("readonly");
 
             if (res.substring(0, 24) == "<!-- AuthcheckFailed -->")
                 CRLogout();
