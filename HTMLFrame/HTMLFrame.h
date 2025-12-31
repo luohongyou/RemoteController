@@ -9,9 +9,9 @@
 // #define BETA
 #define V4_RELEASE
 
-#define VERSION "4.0 RC 2"
+#define VERSION "4.0.0"
 #define BRANCH "rc_release"
-#define OOBEVERSION 14
+#define OOBEVERSION 15
 
 #pragma warning(disable: 4251)
 #include "cgicc/Cgicc.h"
