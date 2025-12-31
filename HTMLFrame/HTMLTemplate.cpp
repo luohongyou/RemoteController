@@ -1,7 +1,7 @@
 // HTMLTemplate.cpp : Coral Remote Controller HTML代码模板的实现。
 
 // 版权声明：
-// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
+// Copyright (C) 2020-2026 Coral Studio. All Rights Reserved.
 
 #include "pch.h"
 #include "HTMLFrame.h"
@@ -123,13 +123,13 @@ R"(
 ""
 #endif
 + R"(
-  <footer id="footer" style="background-image: url(/assets/img/background.jpg?400); background-size:100%; background-repeat:no-repeat; background-position:center;">
+  <footer id="footer" style="background-image: url(/assets/img/background.jpg?500); background-size:100%; background-repeat:no-repeat; background-position:center;">
       <div>
 	    <center>
 			<br>
 			<h4 style="color:white"> Coral Remote Controller </h2>
 			<h5 style="color:white"> 版本 )" + VERSION + R"( </h4>
-			<p style="color:white"> Copyright &copy; 2020 - 2025 Coral Studio. All Rights Reserved. </p>
+			<p style="color:white"> Copyright &copy; 2020 - 2026 Coral Studio. All Rights Reserved. </p>
 			<br>
 	    </center>
 	  </div>

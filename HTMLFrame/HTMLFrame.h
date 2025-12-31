@@ -1,17 +1,16 @@
 // HTMLFrame.h : Coral Remote Controller HTML输出类和函数的定义
 
 // 版权声明：
-// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
+// Copyright (C) 2020-2026 Coral Studio. All Rights Reserved.
 
 #ifndef RC_HTMLFRAME
 #define RC_HTMLFRAME
 
-// #define BETA
-#define V4_RELEASE
+#define BETA
 
-#define VERSION "4.0.0"
-#define BRANCH "rc_release"
-#define OOBEVERSION 15
+#define VERSION "5.0 Beta 1"
+#define BRANCH "rc_vnext_beta"
+#define OOBEVERSION 16
 
 #pragma warning(disable: 4251)
 #include "cgicc/Cgicc.h"

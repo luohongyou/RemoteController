@@ -1,7 +1,7 @@
 ﻿// changelog.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 
 // 版权声明：
-// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
+// Copyright (C) 2020-2026 Coral Studio. All Rights Reserved.
 
 #define ADDRESS "/OOBE/user/changelog.exe"
 
@@ -20,7 +20,13 @@ int main(int argc, char* argv[])
     std::stringstream tempIO;
 
     Source = R"(
-#Remote Controller 4.0.0 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2025/12/31)
+#Remote Controller 5.0 Beta 1 Build )" + (std::string)PROGRAM_BUILD_S + R"( (2026/01/xx)
+*新功能
+TODO
+*Bug修复
+TODO
+
+#Remote Controller 4.0.0 Build 654 (2025/12/31)
 *代码重构与组件更新
 彻底重写了身份验证管理器，提升了系统的安全性和稳定性
 *新功能与改进

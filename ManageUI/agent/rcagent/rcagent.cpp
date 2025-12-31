@@ -1,9 +1,9 @@
 ﻿// rcagent.cpp : Coral Remote Controller 后台操作响应程序
 
 // 版权声明：
-// Copyright (C) 2020-2025 Coral Studio. All Rights Reserved.
+// Copyright (C) 2020-2026 Coral Studio. All Rights Reserved.
 
-#define AGENTVERSION "4.0"
+#define AGENTVERSION "5.0"
 
 #pragma comment(linker,"\"/manifestdependency:type='win32' \
 name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
