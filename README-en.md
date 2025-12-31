@@ -18,7 +18,7 @@ Coral Remote Controller is a browser-based remote controller with some useful fu
 ## Installation and Usage
 ### Set up Client
 1. 将Remote Controller安装包完全解压至合适的位置（建议可以放在系统盘Program Files文件夹下）。
-2. 双击打开“vc_redist.x64.exe”，并按照提示安装依赖的运行库。如果出现“已经安装这个产品的另一个版本”的错误，则跳过此步骤。
+2. 双击打开“vc_redist.x64.exe”，并按照提示安装依赖的运行库。如果出现“已经安装这个产品的另一个版本”的错误，则跳过此步骤。之后再打开“MicrosoftEdgeWebview2Setup.exe”并完成安装。
 3. 在运行库完全安装好（包括重启系统）后，右键解压出文件夹下的“install.bat”并选择“以管理员权限运行”。等待安装脚本自动执行并自动退出。
 4. 在托盘图标中找到Remote Controller的托盘图标，右键并选择“打开Remote Controller管理页面”，按照提示进行root用户初始化设置。
 5. 之后可以使用该root用户，从右上角菜单进入“后台管理”，更改设置并添加更多用户。
@@ -66,6 +66,7 @@ The project contains many opensource project and thridparty resources. I would l
 + libjpeg
 + openssl
 + jsmpeg-vnc
++ boost
 ### Illustration
 + Bing Wallpaper
 + Windows Spotlight

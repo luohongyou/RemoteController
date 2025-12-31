@@ -1,4 +1,4 @@
-// Build 648
+// Build 654
 // Build.h : 定义程序Build信息
 
 // 版权声明：
@@ -7,7 +7,7 @@
 #ifndef _RCBUILD_
 #define _RCBUILD_
 
-#define PROGRAM_BUILD 648
-#define PROGRAM_BUILD_S "648"
+#define PROGRAM_BUILD 654
+#define PROGRAM_BUILD_S "654"
 
 #endif
